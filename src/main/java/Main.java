@@ -1,3 +1,6 @@
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class Main {
     public static void main(String[] args) {
     /*
@@ -15,5 +18,36 @@ public class Main {
 	    - Los administradores pueden congelar cuentas en caso de fraude.
 	    - En el diagrama de clases, utiliza la clase Dinero.
      */
+        // 3) Map<String, Estudiante>
+        Map<String, Estudiante> estudiantes = new LinkedHashMap<>();
+
+        // 5) 4 estudiantes de ejemplo
+        Estudiante e1 = new Estudiante("Ana López", 78);
+        Estudiante e2 = new Estudiante("Bruno Díaz", 90);
+        Estudiante e3 = new Estudiante("Carla Núñez", 65);
+        Estudiante e4 = new Estudiante("Diego Martín", 99);
+
+        estudiantes.put(e1.getNombre(), e1);
+        estudiantes.put(e2.getNombre(), e2);
+        estudiantes.put(e3.getNombre(), e3);
+        estudiantes.put(e4.getNombre(), e4);
+
+        System.out.println("Nota inicial:");
+        estudiantes.values().forEach(System.out::println);
+
+        incrementarCalificaciones(estudiantes);
+
+        System.out.println("\nIncremento nota del +10%:");
+        estudiantes.values().forEach(System.out::println);
+    }
+
+    public static Map<String, Estudiante> incrementarCalificaciones(Map<String, Estudiante> mapa) {
+        for (Estudiante e : mapa.values()) {
+            int actual = e.getCalificacion();
+            int incrementada = (int) Math.round(actual * 1.10);
+            if (incrementada > 100) incrementada = 100;
+            e.setCalificacion(incrementada);
+        }
+        return mapa;
     }
 }
